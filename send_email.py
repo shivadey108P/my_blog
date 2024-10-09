@@ -1,12 +1,11 @@
 import smtplib
-from dotenv import load_dotenv
 import os
-
+from dotenv import load_dotenv
 load_dotenv()
 
-MY_EMAIL = os.environ['EMAIL']
-PASSWORD = os.environ['PASSWORD']
-TO_EMAIL = os.environ['TO_EMAIL']
+MY_EMAIL = os.environ.get('EMAIL')
+PASSWORD = os.environ.get('PASSWORD')
+TO_EMAIL = os.environ.get('TO_EMAIL')
 
 class SendEmail:
     def __init__(self, name, email, phone_number, message) -> None:
