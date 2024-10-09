@@ -28,9 +28,9 @@ pip3 install -r requirements.txt
 
 This will install the packages from the requirements.txt for this project.
 '''
-SECRET_APP_KEY = os.environ['SECRET_KEY']
+SECRET_FLASK_APP_KEY = os.environ['FLASK_KEY']
 app = Flask(__name__)
-app.config['SECRET_KEY'] = SECRET_APP_KEY
+app.config['SECRET_KEY'] = SECRET_FLASK_APP_KEY
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
@@ -55,7 +55,7 @@ def load_user(user_id):
 class Base(DeclarativeBase):
     pass
 this_dir = os.path.dirname(__file__)
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(this_dir, 'posts.db')}'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:///posts.db")
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
@@ -268,4 +268,4 @@ def contact():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5002)
+    app.run(debug=False)
